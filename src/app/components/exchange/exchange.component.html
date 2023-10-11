@@ -18,9 +18,9 @@
         <input
           type="number"
           name="value-1"
-          id="value-1"
           class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           placeholder="0.00"
+          [(ngModel)]="firstValue"
           (input)="handleInput($event)"
         />
         <div class="absolute inset-y-0 right-0 flex items-center">
@@ -30,6 +30,7 @@
             name="currency-1"
             class="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
             (change)="handleChange($event)"
+            [(ngModel)]="firstCurrency"
           >
             <option value="UAH">UAH</option>
             <option value="USD">USD</option>
@@ -54,10 +55,10 @@
         <input
           type="number"
           name="value-2"
-          id="value-2"
           class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           placeholder="0.00"
           (input)="handleInput($event)"
+          [(ngModel)]="secondValue"
         />
         <div class="absolute inset-y-0 right-0 flex items-center">
           <label for="currency-2" class="sr-only">Currency</label>
@@ -66,6 +67,7 @@
             name="currency-2"
             class="h-full disabled:opacity-10 rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
             (change)="handleChange($event)"
+            [(ngModel)]="secondCurrency"
           >
             <option value="UAH">UAH</option>
             <option value="USD">USD</option>

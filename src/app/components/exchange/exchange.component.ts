@@ -1,5 +1,4 @@
 import { Component, Input } from "@angular/core";
-import { first } from "rxjs";
 
 @Component({
   selector: "app-exchange",
@@ -10,6 +9,10 @@ export class exchangeComponent{
   @Input() usd: number = 1;
   @Input() euro: number = 1;
   @Input() cad: number = 1;
+  firstValue: number = 0; // Left value
+  secondValue: number = 0; // Right value
+  firstCurrency: string = "UAH"; // Left currency
+  secondCurrency: string = "UAH"; // Right currency
 
   get currencyValues(): { [key: string]: number } {
     return {
@@ -22,45 +25,26 @@ export class exchangeComponent{
   handleInput(evt: Event) {
     const inputElement = evt.target as HTMLInputElement;
     const identify = inputElement.getAttribute('name');
-    const firstValue = Number(inputElement.value);
-    
+    let k; // multiply coefficient by currency
     if (identify === "value-1") {
-      const firstCurrency = document.getElementById("currency-1") as HTMLSelectElement;
-      const resCurrency = document.getElementById("currency-2") as HTMLSelectElement;
-      const resElement = document.querySelector('[name="value-2"]') as HTMLInputElement;
-
-      const k = this.currencyValues[firstCurrency.value] / this.currencyValues[resCurrency.value];
-        
-      resElement.value = ((firstValue * k).toFixed(2)).toString();
+      k = this.currencyValues[this.firstCurrency] / this.currencyValues[this.secondCurrency];
+      this.secondValue = Number((this.firstValue * k).toFixed(2));
     } else {
-      const firstCurrency = document.getElementById("currency-2") as HTMLSelectElement;
-      const resCurrency = document.getElementById("currency-1") as HTMLSelectElement;
-      const resElement = document.querySelector('[name="value-1"]') as HTMLInputElement;
-
-      const k = this.currencyValues[firstCurrency.value] / this.currencyValues[resCurrency.value];
-        
-      resElement.value = ((firstValue * k).toFixed(2)).toString();
+      k = this.currencyValues[this.secondCurrency] / this.currencyValues[this.firstCurrency];
+      this.firstValue = Number((this.firstValue * k).toFixed(2));
     }
   }
 
   handleChange(evt: Event) {
+    let k;  // multiply coefficient by currency
     const firstCurrency = evt.target as HTMLSelectElement;
     if (firstCurrency.getAttribute("name") === "currency-1") {
-      const firstElement = document.querySelector('[name="value-1"]') as HTMLInputElement;
-      const firstValue = Number(firstElement.value);
-      const resElement = document.querySelector('[name="value-2"]') as HTMLInputElement;
-      const resCurrency = document.getElementById("currency-2") as HTMLSelectElement;
-      const k = this.currencyValues[firstCurrency.value] / this.currencyValues[resCurrency.value];
-
-      resElement.value = ((firstValue * k).toFixed(2)).toString();
+      k = this.currencyValues[this.firstCurrency] / this.currencyValues[this.secondCurrency];
+      this.secondValue = Number((this.firstValue * k).toFixed(2));
     }
     else {
-      const firstElement = document.querySelector('[name="value-1"]') as HTMLInputElement;
-      const firstValue = Number(firstElement.value);
-      const resElement = document.querySelector('[name="value-2"]') as HTMLInputElement;
-      const resCurrency = document.getElementById("currency-1") as HTMLSelectElement;
-      const k = this.currencyValues[resCurrency.value] / this.currencyValues[firstCurrency.value];
-      resElement.value = ((firstValue * k).toFixed(2)).toString();
+      k = this.currencyValues[this.firstCurrency] / this.currencyValues[this.secondCurrency];
+      this.secondValue = Number((this.firstValue * k).toFixed(2));
     }
   }
 }
