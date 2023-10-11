@@ -39,7 +39,7 @@ export class exchangeComponent{
 
       const k = this.currencyValues[firstCurrency.value] / this.currencyValues[resCurrency.value];
         
-      resElement.value = ((firstValue * k).toFixed(1)).toString();
+      resElement.value = ((firstValue * k).toFixed(2)).toString();
     }
   }
 
@@ -52,7 +52,7 @@ export class exchangeComponent{
       const resCurrency = document.getElementById("currency-2") as HTMLSelectElement;
       const k = this.currencyValues[firstCurrency.value] / this.currencyValues[resCurrency.value];
 
-      resElement.value = ((firstValue * k).toFixed(1)).toString();
+      resElement.value = ((firstValue * k).toFixed(2)).toString();
     }
     else {
       const firstElement = document.querySelector('[name="value-1"]') as HTMLInputElement;
@@ -60,7 +60,7 @@ export class exchangeComponent{
       const resElement = document.querySelector('[name="value-2"]') as HTMLInputElement;
       const resCurrency = document.getElementById("currency-1") as HTMLSelectElement;
       const k = this.currencyValues[resCurrency.value] / this.currencyValues[firstCurrency.value];
-      resElement.value = ((firstValue * k).toFixed(1)).toString();
+      resElement.value = ((firstValue * k).toFixed(2)).toString();
     }
   }
 }
